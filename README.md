@@ -7,8 +7,20 @@ Swift package for creating numerical input stepper.
 #### It supports long press gesture
 Input stepper has option to handle long press. You can press the +/- button and hold it for few seconds. In that time the value will be changing with the adjustable speed and step.
 
+## Instalation
+
+In Xcode go to File -> Swift Packages -> Add Package Dependency and paste in the repo's url: https://github.com/mateusz800/InputStepper
+
+Make sure that you have added the library in your project target.
+`Target name` -> General -> Frameworks, Libraries and Embedded Content
+
+
 
 ## Usage
+Import the package in the file you would like to use it: 
+```swift
+import SwiftUI_InputStepper
+```
 
 InputStepper library shares three components that allows you to build your fully customizable input stepper. Among them are `Value`, `PlusButton` and `MinusButton`. Each of them have to be included inside `InputStepper` view.
 
