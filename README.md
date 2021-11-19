@@ -31,7 +31,15 @@ The result of any interaction with input stepper will be available in declared `
 
 #### Customization
 
-You can customize your input stepper via the following modificators:
+You can modify `MinusButton` and `PlusButton` by defining how it should look like. Define some new view and pass it as a parameter
+
+``swift
+MinusButton(){
+    Text("This is a minus button")
+}
+```
+
+You can also customize your input stepper via the following modificators:
 * `.withStep(step:)` - edit step value
 
 

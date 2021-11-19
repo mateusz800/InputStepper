@@ -7,17 +7,28 @@
 
 import SwiftUI
 
-public struct MinusButton: View {
+public struct MinusButton<Content:View>: View {
     @Environment(\.valueStore) var valueStore: ValueStore
-    public init(){}
+    let content:Content
+    
+    public init(@ViewBuilder content: @escaping () -> Content){
+        self.content = content()
+    }
+    
     public var body: some View {
         ControlButton(
             action: valueStore.decrement,
             longPressStartAction: valueStore.startDecreasingValue,
             longPressStopAction: valueStore.stopDecreasingValue){
-                Text("MINUS")
+                content
             }
         
+    }
+}
+
+extension MinusButton where Content == EmptyView {
+    init(){
+        self.init(content: { EmptyView() })
     }
 }
 
