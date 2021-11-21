@@ -10,6 +10,7 @@ import SwiftUI
 struct ControlButton<Content:View>: View {
     @GestureState private var press = false
     @State var actionStart:Bool = false
+    let MAX_DISTANCE:CGFloat = 20
     var action: () -> Void
     var longPressStartAction: () -> Void
     var longPressStopAction: () -> Void
@@ -32,11 +33,17 @@ struct ControlButton<Content:View>: View {
             content
         }.simultaneousGesture(
             DragGesture(minimumDistance:0)
-                .onChanged({_ in
+                .onChanged({gesture in
                     if !actionStart{
                         longPressStartAction()
                     }
                     self.actionStart = true
+                    
+                    if abs(gesture.translation.width) > MAX_DISTANCE
+                        || abs(gesture.translation.height) > MAX_DISTANCE{
+                        longPressStopAction()
+                        self.actionStart = false
+                    }
                     
                 })
                 .onEnded({_ in
