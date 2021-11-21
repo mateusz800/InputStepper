@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension Float {
     var decimalPlaces: Int {
            let decimals = String(self).split(separator: ".")[1]

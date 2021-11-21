@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct ControlButton<Content:View>: View {
+struct ControlButton<Content: View>: View {
     @GestureState private var press = false
-    @State var actionStart:Bool = false
-    let MAX_DISTANCE:CGFloat = 20
+    @State var actionStart: Bool = false
+    let maxDistance: CGFloat = 20
     var action: () -> Void
     var longPressStartAction: () -> Void
     var longPressStopAction: () -> Void
-    
-    let content:Content
+    let content: Content
+
     public init(
-        action:@escaping ()->Void,
+        action:@escaping () -> Void,
         longPressStartAction: @escaping () -> Void,
         longPressStopAction: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
@@ -27,41 +27,37 @@ struct ControlButton<Content:View>: View {
         self.longPressStopAction = longPressStopAction
         self.content = content()
     }
-    
+
     var body: some View {
-        Button(action: action){
+        Button(action: action) {
             content
         }.simultaneousGesture(
-            DragGesture(minimumDistance:0)
+            DragGesture(minimumDistance: 0)
                 .onChanged({gesture in
-                    if !actionStart{
+                    if !actionStart {
                         longPressStartAction()
                     }
                     self.actionStart = true
-                    
-                    if abs(gesture.translation.width) > MAX_DISTANCE
-                        || abs(gesture.translation.height) > MAX_DISTANCE{
+
+                    if abs(gesture.translation.width) > maxDistance
+                        || abs(gesture.translation.height) > maxDistance {
                         longPressStopAction()
                         self.actionStart = false
                     }
-                    
+
                 })
                 .onEnded({_ in
                     longPressStopAction()
                     self.actionStart = false
-                    
+
                 })
-                .updating($press, body:  { (value, gestureState, transaction) in }))
+                .updating($press, body: { (_, _, _) in }))
     }
 }
 
 struct ControlButton_Previews: PreviewProvider {
     static var previews: some View {
-        ControlButton(
-            action: {},
-            longPressStartAction: {},
-            longPressStopAction: {}
-        ){
+        ControlButton(action: {}, longPressStartAction: {}, longPressStopAction: {}) {
             Text("Control Button")
         }
     }
