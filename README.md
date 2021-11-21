@@ -9,15 +9,17 @@ Input stepper has option to handle long press. You can press the +/- button and 
 
 ## Instalation
 
-In Xcode go to File -> Swift Packages -> Add Package Dependency and paste in the repo's url: https://github.com/mateusz800/InputStepper
+In Xcode go to File -> Swift Packages -> Add Package Dependency and paste in the repo's url: <https://github.com/mateusz800/InputStepper>
 
 Make sure that you have added the library in your project target.
 `Target name` -> General -> Frameworks, Libraries and Embedded Content
 
 ## Usage
+
 Import the package in the file you would like to use it: 
+
 ```swift
-import SwiftUI_InputStepper
+import InputStepper
 ```
 
 InputStepper library shares three components that allows you to build your fully customizable input stepper. Among them are `Value`, `PlusButton` and `MinusButton`. Each of them have to be included inside `InputStepper` view.
@@ -49,9 +51,11 @@ MinusButton(){
 ```
 
 It is also possible to define how many decimal digits should be shown after dot. Simply put that number in the constructor of the `Value` view.
+
 ```swift
 Value(decimalPlaces:2)
 ```
 
 You can also customize your input stepper via the following modificators:
-  * `.withStep(step:)` - edit step value
+
+-   `.withStep(step:)` - edit step value
