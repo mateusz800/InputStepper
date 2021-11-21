@@ -23,6 +23,7 @@ class ValueStore:ObservableObject{
     
     init(_ bindedValue:Binding<Float>){
         self._bindedValue = bindedValue
+        self.value = self.bindedValue
     }
     
     func increment(){

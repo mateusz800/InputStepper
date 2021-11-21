@@ -53,6 +53,11 @@ MinusButton(){
 }
 ```
 
+It is also possible to define how many decimal digits should be shown after dot. Simply put that number in the constructor of the `Value` view.
+```swift
+Value(decimalPlaces:2)
+```
+
 You can also customize your input stepper via the following modificators:
 * `.withStep(step:)` - edit step value
 

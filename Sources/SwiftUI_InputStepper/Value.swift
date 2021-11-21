@@ -11,19 +11,38 @@ public struct Value: View {
     @Environment(\.valueStore) var valueStore: ValueStore
     //@ObservedObject var valueObservedStore = valueStore
     @State var value: Float = 0
+    @State var decimalPlaces: Int
+    @State var fixedDecimalPlaces:Bool
     
-    public init(){}
+    public init(){
+        decimalPlaces = 0
+        fixedDecimalPlaces = false
+    }
+    
+    public init(decimalPlaces:Int){
+        self.decimalPlaces = decimalPlaces
+        fixedDecimalPlaces = true
+    }
+    
     
     public var body: some View {
-        Text(String(value ))
+        Text(String(format:"%.\(decimalPlaces)f", value))
             .onReceive(valueStore.objectWillChange){ newValue in
                 value = valueStore.value
             }.onAppear(perform: {
                 value = valueStore.value
+            }).onChange(of: value, perform: {newValue in
+                if !fixedDecimalPlaces && newValue.decimalPlaces > decimalPlaces{
+                    decimalPlaces = newValue.decimalPlaces
+                }
             })
              
     }
 }
+
+
+
+
 
 struct Value_Previews: PreviewProvider {
     static var previews: some View {
