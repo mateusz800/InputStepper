@@ -1,4 +1,4 @@
-name: Swift
+name: Building and testing
 
 on: [push, pull_request]
 
