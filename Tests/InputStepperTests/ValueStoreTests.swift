@@ -13,11 +13,11 @@ class ValueStoreTest: XCTestCase {
 
     func incrementValueInValueStore() throws {
         let valueStore = ValueStore(.constant(initialValue))
-        XCTAssertEqual(initialValue, valueStore.value);
+        XCTAssertEqual(initialValue, valueStore.value)
         valueStore.increment()
-        XCTAssertEqual(initialValue + valueStore.step, valueStore.value);
+        XCTAssertEqual(initialValue + valueStore.step, valueStore.value)
         valueStore.increment()
-        XCTAssertEqual(initialValue + valueStore.step, valueStore.value);
+        XCTAssertEqual(initialValue + valueStore.step, valueStore.value)
     }
-    
+
 }

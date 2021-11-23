@@ -29,29 +29,34 @@ struct ControlButton<Content: View>: View {
     }
 
     var body: some View {
-        Button(action: action) {
+        ZStack {
             content
-        }.simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged({gesture in
-                    if !actionStart {
-                        longPressStartAction()
-                    }
-                    self.actionStart = true
+        }.contentShape(Rectangle())
+            .gesture(
+                LongPressGesture(minimumDuration: 0).onEnded({_ in action()})
+                    .simultaneously(with:
+                                        LongPressGesture(minimumDuration: 0.1).sequenced(before: DragGesture(minimumDistance: 0)
+                                                                                            .onChanged({gesture in
+                                                                                                if gesture.translation.height < 10 {
+                                                                                                    if !actionStart {
+                                                                                                        longPressStartAction()
+                                                                                                    }
+                                                                                                    self.actionStart = true
+                                                                                                }
+                                                                                                if abs(gesture.translation.width) > maxDistance || abs(gesture.translation.height) > maxDistance {
+                                                                                                    longPressStopAction()
+                                                                                                    self.actionStart = false
+                                                                                                }
 
-                    if abs(gesture.translation.width) > maxDistance
-                        || abs(gesture.translation.height) > maxDistance {
-                        longPressStopAction()
-                        self.actionStart = false
-                    }
+                                                                                            })
+                                                                                            .onEnded({_ in
+                                                                                                longPressStopAction()
+                                                                                                self.actionStart = false
 
-                })
-                .onEnded({_ in
-                    longPressStopAction()
-                    self.actionStart = false
+                                                                                            })
+                                                                                            .updating($press, body: { (_, _, _) in })
+                                                                                        )))
 
-                })
-                .updating($press, body: { (_, _, _) in }))
     }
 }
 
