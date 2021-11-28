@@ -5,6 +5,9 @@
 
 Swift package for creating numerical input stepper.
 
+![Example of input stepper](https://user-images.githubusercontent.com/44299056/143782132-3edf0c37-f56e-4182-9a48-4f1a3e5cb7a5.gif)
+*An example of input stepper created with this library*
+
 **It supports long press gesture**
 Input stepper has option to handle long press. You can press the +/- button and hold it for few seconds. In that time the value will be changing with the adjustable speed and step.
 
@@ -43,6 +46,7 @@ The result of any interaction with input stepper will be available in declared `
 
 ### Customization
 
+#### Plus/Minus button
 You can modify `MinusButton` and `PlusButton` by defining how it should look like. Define some new view and pass it as a parameter
 
 ```swift
@@ -50,13 +54,34 @@ MinusButton(){
     Text("This is a minus button")
 }
 ```
-
-It is also possible to define how many decimal digits should be shown after dot. Simply put that number in the constructor of the `Value` view.
+#### Value
+You can customize the view of displayed value. Simply pass appropriate values in the constructor. All parameters are optional.
+- `decimalPlaces: Int` - how many digits shuld be visible after dot/comma
+- `unit: String` - unit that will be visible after value
+- `font: Font` 
+- `fontWeight: Font.Weight` 
 
 ```swift
-Value(decimalPlaces:2)
+Value(
+    decimalPlaces: 2,
+    unit: "cm",
+    font: .system(size: 20),
+    fontWeight: .bold
+)
 ```
 
 You can also customize your input stepper via the following modificators:
 
 -   `.withStep(step:)` - edit step value
+
+```swift
+InputStepper($value) {
+    ...
+}.withStep(step: 0.5)
+```
+
+## Contributing
+Contributions are always welcome!
+
+## Show your support
+Give a ⭐️ if this project helped you!

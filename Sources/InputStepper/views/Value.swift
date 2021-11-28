@@ -13,24 +13,30 @@ public struct Value: View {
     @State var value: Float = 0
     @State var decimalPlaces: Int
     @State var fixedDecimalPlaces: Bool
+    let font: Font
+    let fontWeight: Font.Weight
     let unit: String
 
     public init() {
         decimalPlaces = 0
         fixedDecimalPlaces = false
         unit = ""
+        font = .system(size: 30)
+        fontWeight = .bold
     }
 
-    public init(decimalPlaces: Int, unit: String = "") {
+    public init(decimalPlaces: Int, unit: String = "", font: Font = .system(size: 30), fontWeight: Font.Weight = .bold) {
         self.decimalPlaces = decimalPlaces
         self.unit = unit
+        self.font = font
+        self.fontWeight = fontWeight
         fixedDecimalPlaces = true
     }
 
     public var body: some View {
         Text(String(format: "%.\(decimalPlaces)f %@", value, unit))
-            .font(.system(size: 30))
-            .fontWeight(.bold)
+            .font(font)
+            .fontWeight(fontWeight)
             .onReceive(valueStore.objectWillChange) { _ in
                 value = valueStore.value
             }.onAppear(perform: {
@@ -40,7 +46,8 @@ public struct Value: View {
                     decimalPlaces = newValue.decimalPlaces
                 }
             })
-
+    }
+    func withFont(font: Font, fontWeight: Font.Weight = .regular) {
     }
 }
 

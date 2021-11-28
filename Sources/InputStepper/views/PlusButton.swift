@@ -15,7 +15,7 @@ public struct PlusButton<Content: View>: View {
 
     public init() where Content == EmptyView {
         self.content = AnyView(
-            ZStack{
+            ZStack {
                 Rectangle()
                     .fill(Color.black)
                     .frame(width: 30, height: 5)
