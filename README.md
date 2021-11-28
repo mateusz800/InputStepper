@@ -6,7 +6,7 @@
 Swift package for creating numerical input stepper.
 
 **It supports long press gesture**
-Input stepper has option to handle long press. You can press the +/- button and hold it for few seconds. In that time the value will be changing with the adjustable speed and step.
+Input stepper has option to handle long press. You can press the +/- button and hold it for few seconds. In that time the value will be changing with the adjustable speed and step.  Long press gesture might not working on simulator.
 
 ## Instalation
 
