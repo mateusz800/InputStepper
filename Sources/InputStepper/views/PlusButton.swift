@@ -15,7 +15,14 @@ public struct PlusButton<Content: View>: View {
 
     public init() where Content == EmptyView {
         self.content = AnyView(
-            Text("PLUS")
+            ZStack{
+                Rectangle()
+                    .fill(Color.black)
+                    .frame(width: 30, height: 5)
+                Rectangle()
+                    .fill(Color.black)
+                    .frame(width: 5, height: 30)
+            }
         )
     }
 

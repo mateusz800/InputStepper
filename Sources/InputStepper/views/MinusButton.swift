@@ -13,7 +13,9 @@ public struct MinusButton<Content: View>: View {
 
     public init() where Content == EmptyView {
         self.content = AnyView(
-            Text("MINUS")
+            Rectangle()
+                .fill(Color.black)
+                .frame(width: 30, height: 5)
         )
     }
 
