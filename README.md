@@ -2,6 +2,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/69794271002a4381a57b98303ba3ad16)](https://app.codacy.com/gh/mateusz800/InputStepper?utm_source=github.com&utm_medium=referral&utm_content=mateusz800/InputStepper&utm_campaign=Badge_Grade_Settings)
 [![Building and testing](https://github.com/mateusz800/InputStepper/actions/workflows/swift.yml/badge.svg)](https://github.com/mateusz800/InputStepper/actions/workflows/swift.yml)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fmateusz800%2FInputStepper%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/mateusz800/InputStepper)
 
 Swift package for creating numerical input stepper.
 
