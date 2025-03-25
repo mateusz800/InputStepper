@@ -25,11 +25,22 @@ class ValueStore: ObservableObject {
     }
 
     func increment() {
+        guard let maxValue = maxValue else {
+            value += step
+            bindedValue = value
+            return
+        }
+        guard value < Float(maxValue) else {
+            return
+        }
         value += step
         bindedValue = value
     }
 
     func decrement() {
+        guard value > Float(minValue) else {
+            return
+        }
         value -= step
         bindedValue = value
     }
@@ -38,7 +49,14 @@ class ValueStore: ObservableObject {
         increaseWork = DispatchWorkItem {
             while !(self.increaseWork?.isCancelled ?? false) {
                 DispatchQueue.main.async {
-                    self.value += self.step
+                    guard let maxValue = self.maxValue else {
+                        self.value += self.step
+                        return
+                    }
+                    guard self.value > Float(maxValue) else {
+                        self.value += self.step
+                        return
+                    }
                 }
                 Thread.sleep(forTimeInterval: 1 - self.speed)
             }
@@ -55,7 +73,10 @@ class ValueStore: ObservableObject {
         decreaseWork = DispatchWorkItem {
             while !(self.decreaseWork?.isCancelled ?? false) {
                 DispatchQueue.main.async {
-                    self.value -= self.step
+                    guard self.value < Float(self.minValue) else {
+                        self.value -= self.step
+                        return
+                    }
                 }
                 Thread.sleep(forTimeInterval: 1 - self.speed)
             }
