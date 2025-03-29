@@ -31,6 +31,16 @@ public struct InputStepper<Content: View>: View, Equatable {
         return self
     }
 
+    public func setMinimumValue(_ minimumValue: Int) -> Self {
+        valueStore.minValue = minimumValue
+        return self
+    }
+
+    public func setMaximumValue(_ maximumValue: Int) -> Self {
+        valueStore.maxValue = maximumValue
+        return self
+    }
+
     public static func == (lhs: InputStepper<Content>, rhs: InputStepper<Content>) -> Bool {
         return true
     }
